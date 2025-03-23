@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "d2f72dd9-edd5-4f6f-ba93-a42d1cf3d577",
+		"name": "Laravel Blog API",
+		"description": "A RESTful API built with Laravel and secured via **Laravel Sanctum** for token-based authentication.\n\n**Key Features**:  \n  \n🔐 **Protected CRUD Endpoints**:\n\n- Create, read, update, and delete blog posts (title + content).  \n    \n- Requires Bearer Token for access.  \n    \n\n👥 **Public Auth Endpoints**:\n\n- /api/register: User registration.  \n    \n- /api/login: Generate authentication token.  \n    \n\n**Deployment**:  \n  \n🌐 Hosted on **AWS** (EC2 + RDS).  \n**Tech Stack**: Laravel, Sanctum, MySQL.\n\n**Usage:**\n\n1. **Register** a user → **Login** to get a token.\n    \n2. Include the token in headers:\n    \n3. Test CRUD operations for blogs.  \n    \n\n**Note**: All blog operations require authentication.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "43324745",
+		"_collection_link": "https://planetary-shuttle-403016.postman.co/workspace/98b8f495-8bca-45ea-89a7-320c16f72b8c/collection/43324745-d2f72dd9-edd5-4f6f-ba93-a42d1cf3d577?action=share&source=collection_link&creator=43324745"
+	},
+	"item": [
+		{
+			"name": "User Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\",\n  \"password_confirmation\": \"password123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/register",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"password123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/login",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Blog Post",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "\"token\": \"2|zyU2SkojsnDCzuzBhMPFWW9CPw7Q00Pv7wCn5lCY\"",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"My First Blog Post\",\n    \"content\": \"This is the content of my first blog post.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/blogs",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"blogs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Blog Post",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Updated Blog Post Title\",\n  \"content\": \"Updated content for the blog post.\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/blogs/{3}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"blogs",
+						"{3}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Blog Posts",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "7|TMBE2uqxeUej3ks9gkAyJpJJkBBGyKwQYFPvbeHB",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/blogs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"blogs"
+					]
+				},
+				"description": "This endpoint sends an HTTP GET request to retrieve a list of blogs from the server. The response is in JSON format and includes an array of blog objects, each containing the following properties:\n\n- \"id\": (number) The unique identifier for the blog.\n    \n- \"user_id\": (number) The identifier of the user who created the blog.\n    \n- \"title\": (string) The title of the blog.\n    \n- \"content\": (string) The content of the blog.\n    \n- \"created_at\": (string) The timestamp indicating when the blog was created.\n    \n- \"updated_at\": (string) The timestamp indicating when the blog was last updated."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Blog Post",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/blogs/{3}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"blogs",
+						"{3}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
