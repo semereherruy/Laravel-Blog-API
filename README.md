@@ -14,7 +14,7 @@ A **RESTful API** for a blog platform built with **Laravel**, featuring user aut
 - Input validation for user data.
 
 ### Deployment:
-- Fully deployed on **AWS EC2** with **Nginx**, **MySQL**, and **PHP**.
+- Deployed on **AWS EC2** with **Nginx**, **MySQL**, and **PHP**.
 
 ## Tech Stack
 - **Backend**: Laravel 10
