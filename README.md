@@ -62,8 +62,8 @@ A **RESTful API** for a blog platform built with **Laravel**, featuring user aut
    DB_HOST=127.0.0.1
    DB_PORT=3306
    DB_DATABASE=Blog_db
-   DB_USERNAME=root
-   DB_PASSWORD=root
+   DB_USERNAME=***
+   DB_PASSWORD=***
    ```
 
 5. **Migrate the database:**
